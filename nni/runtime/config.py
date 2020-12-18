@@ -29,6 +29,6 @@ def get_config_file(name: str) -> Path:
     """
     config_file = get_config_directory() / name
     if not config_file.exists():
-        default = Path(nni.__path__, 'runtime/default_config', name)
+        default = Path(nni.__path__[0], 'runtime/default_config', name)
         shutil.copyfile(default, config_file)
     return config_file
