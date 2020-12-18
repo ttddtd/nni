@@ -47,7 +47,7 @@ jobs:
       runOptions: commands
       commands: |
         python3 /tmp/nnitest/$(Build.BuildId)/test/vso_tools/build_wheel.py $(NNI_RELEASE)
-        python3 /tmp/nnitest/$(Build.BuildId)/test/vso_tools/start_docker.py $(NNI_RELEASE) $(Build.BuildId)
+        python3 /tmp/nnitest/$(Build.BuildId)/test/vso_tools/start_docker.py $(NNI_RELEASE) $(Build.BuildId) $(password_in_docker)
       failOnStdErr: false
     displayName: Install NNI and run docker on Linux worker
 
