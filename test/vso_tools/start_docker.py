@@ -21,5 +21,5 @@ while True:
     port = random.randint(10000, 20000)
 
 run_command(f'docker build --build-arg NNI_RELEASE={sys.argv[1]} -t nni-nightly .')
-run_command(f'docker run -d -p {port}:22 --name {sys.argv[2]} nni-nightly')
+run_command(f'docker run -d -t -p {port}:22 --name {sys.argv[2]} nni-nightly')
 set_variable('docker_port', port)

@@ -104,4 +104,5 @@ jobs:
       sshEndpoint: $(worker)
       runOptions: commands
       commands: python3 /tmp/nnitest/$(Build.BuildId)/test/vso_tools/stop_docker.py $(Build.BuildId)
+    condition: always()
     displayName: Stop docker
