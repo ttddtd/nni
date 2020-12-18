@@ -2,7 +2,7 @@
 Build docker image, start container, then set its SSH service port to VSO variable "docker_port".
 
 Usage:
-    python start_docker.py <nni-version> <container-name>
+    python start_docker.py <nni-version> <container-name> <password-in-docker>
 """
 
 import random
@@ -20,6 +20,12 @@ while True:
     sock.close()
     port = random.randint(10000, 20000)
 
-run_command(f'docker build --build-arg NNI_RELEASE={sys.argv[1]} -t nni-nightly .')
-run_command(f'docker run -d -t -p {port}:22 --name {sys.argv[2]} nni-nightly')
+version = sys.argv[1]
+container = sys.argv[2]
+password = sys.argv[3]
+
+run_command(f'docker build --build-arg NNI_RELEASE={version} -t nni-nightly .')
+run_command(f'docker run -d -t -p {port}:22 --name {container} nni-nightly')
+run_command(f'docker exec {container} useradd --create-home --password {password} nni')
+run_command(f'docker exec {container} service ssh start')
 set_variable('docker_port', port)
